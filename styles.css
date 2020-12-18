@@ -226,13 +226,13 @@ ul.habilidades li:nth-child(2):before {
 }
 
 ul.habilidades li:nth-child(3):before {
-	content: '60%';
+	content: '70%';
 	width: 70%;
 }
 
 ul.habilidades li:nth-child(4):before {
 	content: '60%';
-	width: 70%;
+	width: 60%;
 }
 
 section#contato {
