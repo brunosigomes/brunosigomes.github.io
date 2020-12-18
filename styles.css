@@ -216,22 +216,22 @@ ul.habilidades li:before {
 }
 
 ul.habilidades li:nth-child(1):before {
-	content: '90%';
-	width: 90%;
+	content: '80%';
+	width: 80%;
 }
 
 ul.habilidades li:nth-child(2):before {
-	content: '80%';
-	width: 80%;
+	content: '70%';
+	width: 70%;
 }
 
 ul.habilidades li:nth-child(3):before {
-	content: '80%';
-	width: 80%;
+	content: '60%';
+	width: 70%;
 }
 
 ul.habilidades li:nth-child(4):before {
-	content: '70%';
+	content: '60%';
 	width: 70%;
 }
 
