@@ -385,11 +385,18 @@ footer span{color:var(--purple)}
     </div>
     <div>
       <div class="contact-form">
-        <input type="text" placeholder="Seu nome"/>
-        <input type="email" placeholder="Seu e-mail"/>
-        <input type="text" placeholder="Assunto"/>
-        <textarea placeholder="Sua mensagem..."></textarea>
-        <button class="btn-send">Enviar mensagem →</button>
+        <input type="text" id="cf-nome" placeholder="Seu nome"/>
+        <input type="email" id="cf-email" placeholder="Seu e-mail"/>
+        <input type="text" id="cf-assunto" placeholder="Assunto"/>
+        <textarea id="cf-msg" placeholder="Sua mensagem..."></textarea>
+        <button class="btn-send" onclick="
+          var nome = document.getElementById('cf-nome').value;
+          var email = document.getElementById('cf-email').value;
+          var assunto = document.getElementById('cf-assunto').value;
+          var msg = document.getElementById('cf-msg').value;
+          var corpo = 'Nome: ' + nome + '%0AEmail: ' + email + '%0A%0A' + msg;
+          window.location.href = 'mailto:brunosigomes@gmail.com?subject=' + encodeURIComponent(assunto || 'Contato pelo portfólio') + '&body=' + corpo;
+        ">Enviar mensagem →</button>
       </div>
     </div>
   </div>
