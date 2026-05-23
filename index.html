@@ -1,121 +1,403 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Bruno Gomes</title>
-	<link rel="stylesheet" href="styles.css">
-	<script src="https://kit.fontawesome.com/87e949dcbd.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bruno Gomes · Dev</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0A0A0F;--bg2:#13131A;--bg3:#1A1A26;
+  --purple:#7F77DD;--purple-light:#AFA9EC;--purple-dark:#534AB7;
+  --text:#F0F0F0;--text2:#A0A0B0;--text3:#606070;
+  --border:#2A2A3A;--mono:'Courier New',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.7}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:0 2rem}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-mark{width:32px;height:32px;background:var(--purple);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:13px;color:#fff;letter-spacing:-1px}
+.nav-name{font-size:15px;font-weight:500;color:var(--text)}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{font-size:13px;color:var(--text2);text-decoration:none;font-family:var(--mono);letter-spacing:0.05em;transition:color .2s}
+.nav-links a:hover{color:var(--purple-light)}
+section{max-width:960px;margin:0 auto;padding:5rem 2rem}
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:7rem}
+.hero-tag{font-family:var(--mono);font-size:12px;color:var(--purple);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.25rem}
+.hero-name{font-size:clamp(2.5rem,6vw,4rem);font-weight:500;letter-spacing:-1.5px;line-height:1.1;margin-bottom:1rem}
+.hero-name span{color:var(--purple)}
+.hero-desc{font-size:1.05rem;color:var(--text2);max-width:560px;margin-bottom:2rem}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-block;padding:10px 22px;background:var(--purple);color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500;transition:background .2s}
+.btn-primary:hover{background:var(--purple-dark)}
+.btn-outline{display:inline-block;padding:10px 22px;border:0.5px solid var(--border);color:var(--text2);border-radius:8px;text-decoration:none;font-size:14px;transition:border-color .2s,color .2s}
+.btn-outline:hover{border-color:var(--purple);color:var(--purple-light)}
+.chip-row{margin-top:2.5rem;display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:20px;background:var(--bg2);color:var(--purple-light);border:0.5px solid var(--border)}
+.divider{border:none;border-top:0.5px solid var(--border);margin:0}
+.section-tag{font-family:var(--mono);font-size:11px;color:var(--purple);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem}
+.section-header{margin-bottom:2.5rem}
+.section-header h2{font-size:1.75rem;font-weight:500;letter-spacing:-0.5px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start}
+.about-avatar{width:120px;height:120px;background:var(--purple-dark);border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:2.25rem;color:#fff;margin-bottom:1.25rem}
+.about-text h2{font-size:1.75rem;font-weight:500;margin-bottom:1rem;letter-spacing:-0.5px}
+.about-text p{color:var(--text2);font-size:15px;margin-bottom:.85rem}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;gap:0}
+.exp-item{display:grid;grid-template-columns:160px 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:0.5px solid var(--border)}
+.exp-item:last-child{border-bottom:none}
+.exp-date{font-family:var(--mono);font-size:11px;color:var(--text3);line-height:1.6;padding-top:4px}
+.exp-date strong{display:block;font-size:12px;color:var(--text2);font-weight:500;margin-bottom:2px}
+.exp-body{}
+.exp-role{font-size:15px;font-weight:500;color:var(--text);margin-bottom:2px}
+.exp-company{font-size:13px;color:var(--purple-light);font-family:var(--mono);margin-bottom:8px}
+.exp-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:10px}
+.exp-tags{display:flex;flex-wrap:wrap;gap:6px}
+.exp-tags span{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:20px;background:var(--bg2);color:var(--purple-light);border:0.5px solid var(--border)}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.skill-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem}
+.skill-card h3{font-size:12px;font-weight:500;color:var(--purple-light);font-family:var(--mono);letter-spacing:0.05em;margin-bottom:12px;text-transform:uppercase}
+.skill-list{display:flex;flex-direction:column;gap:9px}
+.skill-item{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text2)}
+.skill-bar{width:72px;height:3px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.skill-fill{height:100%;background:var(--purple);border-radius:2px}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.project-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color .2s;display:flex;flex-direction:column}
+.project-card:hover{border-color:var(--purple)}
+.project-icon{width:38px;height:38px;background:var(--bg3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:.85rem}
+.project-card h3{font-size:15px;font-weight:500;margin-bottom:6px}
+.project-card p{font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.6;flex:1}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem}
+.project-tags span{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:20px;background:var(--bg3);color:var(--purple-light);border:0.5px solid var(--border)}
+.project-link{font-size:12px;color:var(--purple);font-family:var(--mono);text-decoration:none}
+.project-link:hover{color:var(--purple-light)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-info h2{font-size:1.75rem;font-weight:500;margin-bottom:1rem;letter-spacing:-0.5px}
+.contact-info p{color:var(--text2);font-size:15px;margin-bottom:2rem}
+.contact-links{display:flex;flex-direction:column;gap:12px}
+.contact-link{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text2);font-size:13px;font-family:var(--mono);transition:border-color .2s,color .2s}
+.contact-link:hover{border-color:var(--purple);color:var(--purple-light)}
+.contact-link-icon{width:28px;height:28px;background:var(--bg3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.contact-form{display:flex;flex-direction:column;gap:12px}
+.contact-form input,.contact-form textarea{background:var(--bg2);border:0.5px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;resize:none}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--purple)}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--text3)}
+.contact-form textarea{height:100px}
+.btn-send{background:var(--purple);color:#fff;border:none;border-radius:8px;padding:12px 22px;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;font-family:inherit}
+.btn-send:hover{background:var(--purple-dark)}
+footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;font-family:var(--mono);font-size:12px;color:var(--text3)}
+footer span{color:var(--purple)}
+@media(max-width:640px){
+  .about-grid{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .nav-links{gap:1rem}
+}
+</style>
 </head>
 <body>
-	<header>
-		<nav>
-			<a href="#inicio">
-				<svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171.05 45.55">
-					<defs>
-						<style>
-							.cls-1 { 
-								fill: #3fa9f5; 
-							}
-						</style>
-					</defs>
-					<g id="Camada_2" data-name="Camada 2">
-						<g id="Camada_1-2" data-name="Camada 1">
-							<path d="M7.72,4.08H11.9V6.54H9.39A1.7,1.7,0,0,0,8.14,7a2,2,0,0,0-.42,1.43v14.7A5.22,5.22,0,0,1,6.05,27a5.71,5.71,0,0,1,1.67,4.29v14.1a1.63,1.63,0,0,0,.42,1.22,1.82,1.82,0,0,0,1.25.61H11.9v2.46H7.72A4,4,0,0,1,4.8,48.41a4.13,4.13,0,0,1-1.25-3.06V30.23A1.76,1.76,0,0,0,2.92,29a3,3,0,0,0-2.09-.61V25.53a2.92,2.92,0,0,0,2.09-.61,1.76,1.76,0,0,0,.63-1.23V8.38A4.14,4.14,0,0,1,4.8,5.31,4,4,0,0,1,7.72,4.08Z" transform="translate(-0.83 -4.08)"/>
-							<path d="M15.59,7.81h7.15V44.94H15.59ZM18.73,38.2h12.1A5.66,5.66,0,0,0,34.63,37,4.07,4.07,0,0,0,36,33.78V33.7a4.6,4.6,0,0,0-.6-2.4,3.82,3.82,0,0,0-1.76-1.52,6.86,6.86,0,0,0-2.78-.52H18.73V22.52h12.1a5,5,0,0,0,3.44-1.1,4,4,0,0,0,1.21-3.09,3.41,3.41,0,0,0-1.21-2.78,5.32,5.32,0,0,0-3.44-1H18.73V7.81H31.07A15.15,15.15,0,0,1,37.36,9a8.6,8.6,0,0,1,4,3.45,10.26,10.26,0,0,1,1.36,5.42,8.24,8.24,0,0,1-.87,3.85,7.19,7.19,0,0,1-2.55,2.74,10.6,10.6,0,0,1-4,1.46,10.22,10.22,0,0,1,4.3,1.49,7.57,7.57,0,0,1,2.71,3,9.6,9.6,0,0,1,.93,4.32v.08a10.41,10.41,0,0,1-1.37,5.46,8.72,8.72,0,0,1-4,3.46,15.17,15.17,0,0,1-6.3,1.19H18.73Z" transform="translate(-0.83 -4.08)"/>
-							<path d="M70.26,43.7A10.92,10.92,0,0,1,65.54,39a16,16,0,0,1-1.62-7.47V7.81h7.15V31.69a6.72,6.72,0,0,0,1.75,4.95,6.66,6.66,0,0,0,4.93,1.76,6.73,6.73,0,0,0,5-1.76,6.69,6.69,0,0,0,1.76-4.95V7.81h7.15v23.7A15.85,15.85,0,0,1,90,39a10.94,10.94,0,0,1-4.75,4.72,16.07,16.07,0,0,1-7.5,1.62A16,16,0,0,1,70.26,43.7Z" transform="translate(-0.83 -4.08)"/>
-							<path d="M98.63,7.81h8.74l14.12,28.45-.63.66V7.81h6.84v37.1h-8.8l-14.06-28,.63-.66V44.91H98.63Z" transform="translate(-0.83 -4.08)"/>
-							<path class="cls-1" d="M137.41,42.52a10.25,10.25,0,0,1-2.9-7.74V17.9q0-5,2.91-7.78c1.94-1.84,4.76-2.77,8.44-2.77s6.53.92,8.46,2.76,2.9,4.43,2.9,7.79V34.78q0,5-2.91,7.77t-8.45,2.77Q140.31,45.32,137.41,42.52Zm11.64-5.38a7.14,7.14,0,0,0,1-4.15V19.69a7.12,7.12,0,0,0-1-4.15,4.22,4.22,0,0,0-6.37,0,7.12,7.12,0,0,0-1,4.15V33a7.14,7.14,0,0,0,1,4.15,4.24,4.24,0,0,0,6.37,0Z" transform="translate(-0.83 -4.08)"/>
-							<path d="M160.82,49.64V47.18h2.51a1.82,1.82,0,0,0,1.25-.61,1.63,1.63,0,0,0,.42-1.22V31.25A5.71,5.71,0,0,1,166.67,27,5.22,5.22,0,0,1,165,23.08V8.38A2,2,0,0,0,164.58,7a1.7,1.7,0,0,0-1.25-.41h-2.51V4.08H165a4,4,0,0,1,2.92,1.23,4.14,4.14,0,0,1,1.25,3.07V23.69a1.76,1.76,0,0,0,.63,1.23,2.92,2.92,0,0,0,2.09.61v2.86a3,3,0,0,0-2.09.61,1.76,1.76,0,0,0-.63,1.23V45.35a4.13,4.13,0,0,1-1.25,3.06A4,4,0,0,1,165,49.64Z" transform="translate(-0.83 -4.08)"/><path class="cls-1" d="M48.26,7.91h6.1L60,10.41v7.43l-4.62-1.71V45H48.26Z" transform="translate(-0.83 -4.08)"/>
-						</g>
-					</g>
-				</svg>				
-			</a>
-			<ul class="menu desktop">
-				<li><a href="#inicio">Inicio</a></li>
-				<li><a href="#sobre">Sobre mim</a></li>
-				<li><a href="#habilidades">Habilidades</a></li>
-				<li><a href="#contato">Contato</a></li>
-			</ul>
-			<div class="menu-icone mobile" id="toggle">
-				<span class="line-1"></span>
-				<span class="line-2"></span>
-				<span class="line-3"></span>
-			</div>
-			<ul class="menu-mobile" id="menu-mobile">
-				<li><a href="#inicio" class="link-mobile">Inicio</a></li>
-				<li><a href="#sobre" class="link-mobile">Sobre mim</a></li>
-				<li><a href="#habilidades" class="link-mobile">Habilidades</a></li>
-				<li><a href="#contato" class="link-mobile">Contato</a></li>
-			</ul>
-		</nav>
-	</header>
-	<main>
-		<div class="container">
-			<section id="inicio">
-				<div class="texto">
-					<h1>Web Developer</h1>
 
-					<p>Tudo quanto fizerdes, fazei-o de todo o coração, como para o Senhor e não para homens, cientes de que recebereis do Senhor a recompensa da herança. Colossenses 3:23</p>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">
+      <div class="nav-mark">BD</div>
+      <span class="nav-name">bruno dev</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">sobre</a>
+      <a href="#experience">experiência</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projetos</a>
+      <a href="#contact">contato</a>
+    </div>
+  </div>
+</nav>
 
-					<a href="#sobre" class="botao">sobre mim</a>
-				</div>
-				<div class="imagem">
-					<img src="inicio.png" alt="inicio.png">
-				</div>
-			</section>	
-			<section id="sobre">
-				<div class="imagem desktop">
-					<img src="sobre.png" alt="sobre.png">
-				</div>
-				<div class="texto">
-					<h1>Sobre mim <br></h1>
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-tag">// software developer · avenue code · são paulo, remoto</div>
+    <h1 class="hero-name">Olá, sou<br><span>Bruno Gomes</span></h1>
+    <p class="hero-desc">Desenvolvedor de software com mais de 5 anos de experiência. Especializado em .NET no backend, com passagem por frontend e uma visão full stack do desenvolvimento de produto.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">Ver projetos</a>
+      <a href="#contact" class="btn-outline">Entrar em contato</a>
+    </div>
+    <div class="chip-row">
+      <span class="chip">C# · .NET</span>
+      <span class="chip">ASP.NET Core</span>
+      <span class="chip">RabbitMQ</span>
+      <span class="chip">Redis</span>
+      <span class="chip">Azure</span>
+      <span class="chip">SQL Server</span>
+      <span class="chip">DDD · SOLID</span>
+      <span class="chip">Clean Architecture</span>
+    </div>
+  </div>
+</section>
 
-					<p>Sou Bruno Gomes, um jovem de 26 anos, formado em análise e desenvolvimento de sistemas. Amo criar sites, sistemas e aplicativos e busco me aprimorar a cada novo projeto.</p>
+<hr class="divider"/>
 
-					<a href="#habilidades" class="botao">habilidades</a>
-				</div>
-				<div class="imagem mobile">
-					<img src="sobre.png" alt="sobre.png">
-				</div>
-			</section>	
-			<section id="habilidades">				
-				<div class="texto">
-					<h1>Habilidades</h1>
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="about-avatar">BG</div>
+      <div class="chip-row" style="margin-top:0;flex-direction:column;align-items:flex-start;gap:6px">
+        <span class="chip">📍 São Paulo, Brasil</span>
+        <span class="chip">💼 Avenue Code</span>
+        <span class="chip">🌐 Remoto</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-tag">// sobre mim</div>
+      <h2>Código com propósito</h2>
+      <p>Comecei no frontend, passei pelo PHP e encontrei meu lugar no ecossistema .NET — onde atuo hoje com foco em backend, APIs REST robustas e arquitetura de software bem estruturada.</p>
+      <p>Na Avenue Code, construo e mantenho soluções escaláveis com .NET, RabbitMQ para mensageria e Redis para cache distribuído. Aplico DDD, SOLID e Clean Architecture no dia a dia, não só no discurso.</p>
+      <p>Tenho uma visão full stack que me permite dialogar com produto, design e frontend — o que facilita muito a entrega de valor real.</p>
+    </div>
+  </div>
+</section>
 
-					<ul class="habilidades">
-						<li>PHP</li>
-						<li>HTML</li>
-						<li>CSS</li>
-						<li>Javascript</li>						
-					</ul>
+<hr class="divider"/>
 
-					<a href="#contato" class="botao">contato</a>
-				</div>
-				<div class="imagem">
-					<img src="habilidades.png" alt="habilidades.png">
-				</div>
-			</section>	
-			<section id="contato">
-				<div class="imagem desktop">
-					<img src="contato.png" alt="contato.png">
-				</div>
-				<div class="texto">
-					<h1>Contato <br></h1>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-tag">// trajetória</div>
+    <h2>Experiência profissional</h2>
+  </div>
+  <div class="exp-list">
 
-					<p><strong>Whatsapp:</strong> (11) 98203.2788</p>
-					<p><strong>E-mail:</strong> brunosigomes@gmail.com</p>					
-				</div>
-				<div class="imagem mobile">
-					<img src="contato.png" alt="contato.png">
-				</div>
-			</section>
-		</div>
-	</main>
-	<footer>
-		&copy; Todos os direitos reservados.
-	</footer>
-	<script type="text/javascript" src="scripts.js"></script>
+    <div class="exp-item">
+      <div class="exp-date">
+        <strong>Avenue Code</strong>
+        out 2024 – atual<br>1 ano 8 meses<br>São Paulo · Remoto
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Software Developer</div>
+        <div class="exp-company">Tempo integral</div>
+        <div class="exp-desc">Desenvolvimento backend com .NET e APIs REST. Implementação de mensageria via RabbitMQ e cache distribuído com Redis. Atuação também no frontend com HTML, CSS, JavaScript e Razor para telas responsivas.</div>
+        <div class="exp-tags"><span>.NET Core</span><span>ASP.NET MVC</span><span>RabbitMQ</span><span>Redis</span><span>SQL</span><span>Razor</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">
+        <strong>Flip Saúde</strong>
+        mar 2023 – ago 2024<br>1 ano 6 meses<br>São Paulo · Remoto
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Back End Developer</div>
+        <div class="exp-company">Autônomo</div>
+        <div class="exp-desc">APIs REST com PHP Laravel, cache com Redis e integrações com soluções de Banking as a Service (BaaS) e APIs de POS para sistemas financeiros e de pagamento.</div>
+        <div class="exp-tags"><span>PHP</span><span>Laravel</span><span>Redis</span><span>MySQL</span><span>BaaS</span><span>REST APIs</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">
+        <strong>Semexe</strong>
+        dez 2021 – fev 2023<br>1 ano 3 meses<br>São Paulo
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Frontend Web Developer</div>
+        <div class="exp-company">Autônomo</div>
+        <div class="exp-desc">Repaginação de site e desenvolvimento de interfaces modernas e responsivas com HTML, CSS, JavaScript e Vue.js. Foco em UX e componentização.</div>
+        <div class="exp-tags"><span>Vue.js</span><span>JavaScript</span><span>HTML</span><span>CSS</span><span>jQuery</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">
+        <strong>Flexup</strong>
+        jul 2020 – dez 2021<br>1 ano 6 meses
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Desenvolvedor Web Front End</div>
+        <div class="exp-company">Autônomo</div>
+        <div class="exp-desc">Modernização de interfaces, manutenção de sites WordPress e desenvolvimento de sistemas internos como intranets e plataformas de controle de ponto e timesheet.</div>
+        <div class="exp-tags"><span>WordPress</span><span>JavaScript</span><span>jQuery</span><span>MySQL</span><span>HTML/CSS</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">
+        <strong>Evolve Soluções</strong>
+        jun 2019 – jul 2020<br>1 ano 2 meses<br>São Paulo
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Desenvolvedor Web PHP</div>
+        <div class="exp-company">Estágio</div>
+        <div class="exp-desc">Início da carreira no desenvolvimento web com PHP. Desenvolvimento e manutenção de sistemas internos.</div>
+        <div class="exp-tags"><span>PHP</span><span>jQuery</span><span>MySQL</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag">// habilidades</div>
+    <h2>Stack & tecnologias</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3>Backend · .NET</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>C# / .NET</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+        <div class="skill-item"><span>ASP.NET Core</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+        <div class="skill-item"><span>REST APIs</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+        <div class="skill-item"><span>Entity Framework</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Mensageria & Cache</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>RabbitMQ</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+        <div class="skill-item"><span>Redis</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-item"><span>Azure Service Bus</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Arquitetura</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>Clean Architecture</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+        <div class="skill-item"><span>DDD</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-item"><span>SOLID</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+        <div class="skill-item"><span>MVC</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Dados</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>SQL Server</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+        <div class="skill-item"><span>MySQL</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+        <div class="skill-item"><span>Procedures / Queries</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Cloud & DevOps</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>Azure</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+        <div class="skill-item"><span>Docker</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+        <div class="skill-item"><span>Git / GitHub</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Frontend</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>HTML / CSS / JS</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-item"><span>Vue.js</span><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
+        <div class="skill-item"><span>Razor</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">// projetos</div>
+    <h2>Trabalhos recentes</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">🌐</div>
+      <h3>WebApi8</h3>
+      <p>Web API REST construída com .NET 8, com estrutura organizada em Controllers, Services, DTOs, Models e Migrations. Boas práticas de separação de responsabilidades aplicadas desde a base.</p>
+      <div class="project-tags"><span>C#</span><span>.NET 8</span><span>ASP.NET Core</span><span>EF Core</span></div>
+      <a href="https://github.com/brunosigomes/WebApi8" target="_blank" class="project-link">→ ver repositório</a>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">✅</div>
+      <h3>Sistema de Tarefas</h3>
+      <p>Sistema de gerenciamento de tarefas desenvolvido em C#, com arquitetura limpa e organização em camadas. Projeto focado em produtividade e controle de atividades.</p>
+      <div class="project-tags"><span>C#</span><span>.NET</span><span>Clean Arch</span></div>
+      <a href="https://github.com/brunosigomes/SistemaDeTarefas" target="_blank" class="project-link">→ ver repositório</a>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">🎓</div>
+      <h3>API CRUD Estudantes</h3>
+      <p>API REST completa para gerenciamento de estudantes, com operações de criação, leitura, atualização e exclusão. 100% em C# com estrutura organizada em camadas.</p>
+      <div class="project-tags"><span>C#</span><span>.NET</span><span>REST API</span><span>CRUD</span></div>
+      <a href="https://github.com/brunosigomes/ApiCrudEstudantes" target="_blank" class="project-link">→ ver repositório</a>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">🏫</div>
+      <h3>DevSchool</h3>
+      <p>Sistema educacional desenvolvido em C#, com foco em gestão escolar. Estrutura modular e orientada a objetos, aplicando conceitos de Clean Architecture.</p>
+      <div class="project-tags"><span>C#</span><span>.NET</span><span>OOP</span><span>Clean Arch</span></div>
+      <a href="https://github.com/brunosigomes/DevSchool" target="_blank" class="project-link">→ ver repositório</a>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">🏃</div>
+      <h3>Controle de Atletas</h3>
+      <p>CRUD para controle de cadastro de atletas, desenvolvido em JavaScript. Um dos primeiros projetos públicos, demonstrando a bagagem full stack e a evolução da carreira.</p>
+      <div class="project-tags"><span>JavaScript</span><span>CRUD</span><span>Frontend</span></div>
+      <a href="https://github.com/brunosigomes/Controle-de-Atletas" target="_blank" class="project-link">→ ver repositório</a>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">📂</div>
+      <h3>Mais no GitHub</h3>
+      <p>20 repositórios públicos com projetos em C#, .NET e JavaScript. Acesse o perfil para explorar todos os projetos e acompanhar o trabalho em andamento.</p>
+      <div class="project-tags"><span>C#</span><span>.NET</span><span>JavaScript</span><span>20 repos</span></div>
+      <a href="https://github.com/brunosigomes" target="_blank" class="project-link">→ ver todos no GitHub</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-tag">// contato</div>
+      <h2>Vamos conversar?</h2>
+      <p>Aberto a projetos, colaborações e novas oportunidades. Respondo em até 24h.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/brunosigomes/" target="_blank" class="contact-link">
+          <div class="contact-link-icon">💼</div>
+          linkedin.com/in/brunosigomes
+        </a>
+        <a href="https://github.com/brunosigomes" target="_blank" class="contact-link">
+          <div class="contact-link-icon">🐙</div>
+          github.com/brunosigomes
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <input type="text" placeholder="Seu nome"/>
+        <input type="email" placeholder="Seu e-mail"/>
+        <input type="text" placeholder="Assunto"/>
+        <textarea placeholder="Sua mensagem..."></textarea>
+        <button class="btn-send">Enviar mensagem →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>feito com <span>♥</span> por <span>bruno gomes</span> · 2025</p>
+</footer>
+
 </body>
 </html>
