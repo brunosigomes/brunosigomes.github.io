@@ -23,7 +23,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.8
 .nav-links a{font-size:13px;color:var(--text2);text-decoration:none;font-family:var(--mono);letter-spacing:0.05em;transition:color .2s}
 .nav-links a:hover{color:var(--purple-light)}
 section{max-width:960px;margin:0 auto;padding:5rem 2rem}
-#hero{min-height:100vh;display:flex;align-items:center;padding-top:7rem}
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding-top:7rem;gap:2rem}
+.hero-illustration{display:flex;align-items:center;justify-content:center}
+.hero-illustration img{width:100%;max-width:420px;opacity:.92}
+@media(max-width:768px){#hero{grid-template-columns:1fr}.hero-illustration{display:none}}
 .hero-tag{font-family:var(--mono);font-size:12px;color:var(--purple);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.25rem}
 .hero-name{font-size:clamp(2.5rem,6vw,4rem);font-weight:500;letter-spacing:-1.5px;line-height:1.1;margin-bottom:1rem}
 .hero-name span{color:var(--purple)}
@@ -144,6 +147,41 @@ footer span{color:var(--purple)}
       <span class="chip">Clean Architecture</span>
     </div>
   </div>
+  <div class="hero-illustration">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt="" style="display:none"/>
+    <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px">
+      <rect x="40" y="60" width="420" height="280" rx="16" fill="#13131A" stroke="#2A2A3A" stroke-width="1"/>
+      <rect x="40" y="60" width="420" height="36" rx="16" fill="#1A1A26"/>
+      <rect x="40" y="80" width="420" height="16" fill="#1A1A26"/>
+      <circle cx="68" cy="78" r="7" fill="#534AB7"/>
+      <circle cx="92" cy="78" r="7" fill="#3C3489"/>
+      <circle cx="116" cy="78" r="7" fill="#2A2A3A"/>
+      <text x="72" y="122" font-family="Courier New,monospace" font-size="13" fill="#7F77DD">public class</text>
+      <text x="190" y="122" font-family="Courier New,monospace" font-size="13" fill="#AFA9EC">BrunoGomes</text>
+      <text x="310" y="122" font-family="Courier New,monospace" font-size="13" fill="#606070">{</text>
+      <text x="88" y="150" font-family="Courier New,monospace" font-size="12" fill="#606070">// Software Developer</text>
+      <text x="88" y="175" font-family="Courier New,monospace" font-size="12" fill="#7F77DD">string</text>
+      <text x="140" y="175" font-family="Courier New,monospace" font-size="12" fill="#F0F0F0">Stack</text>
+      <text x="185" y="175" font-family="Courier New,monospace" font-size="12" fill="#606070">=</text>
+      <text x="200" y="175" font-family="Courier New,monospace" font-size="12" fill="#AFA9EC">".NET + C#"</text>
+      <text x="88" y="200" font-family="Courier New,monospace" font-size="12" fill="#7F77DD">string</text>
+      <text x="140" y="200" font-family="Courier New,monospace" font-size="12" fill="#F0F0F0">Company</text>
+      <text x="197" y="200" font-family="Courier New,monospace" font-size="12" fill="#606070">=</text>
+      <text x="212" y="200" font-family="Courier New,monospace" font-size="12" fill="#AFA9EC">"Avenue Code"</text>
+      <text x="88" y="225" font-family="Courier New,monospace" font-size="12" fill="#7F77DD">bool</text>
+      <text x="128" y="225" font-family="Courier New,monospace" font-size="12" fill="#F0F0F0">Available</text>
+      <text x="196" y="225" font-family="Courier New,monospace" font-size="12" fill="#606070">=</text>
+      <text x="211" y="225" font-family="Courier New,monospace" font-size="12" fill="#7F77DD">true</text>
+      <text x="88" y="258" font-family="Courier New,monospace" font-size="12" fill="#7F77DD">string[]</text>
+      <text x="152" y="258" font-family="Courier New,monospace" font-size="12" fill="#F0F0F0">Skills</text>
+      <text x="193" y="258" font-family="Courier New,monospace" font-size="12" fill="#606070">=</text>
+      <text x="208" y="258" font-family="Courier New,monospace" font-size="12" fill="#606070">{</text>
+      <text x="104" y="278" font-family="Courier New,monospace" font-size="11" fill="#AFA9EC">"RabbitMQ", "Redis", "Azure",</text>
+      <text x="104" y="296" font-family="Courier New,monospace" font-size="11" fill="#AFA9EC">"DDD", "SOLID", "Clean Arch"</text>
+      <text x="88" y="314" font-family="Courier New,monospace" font-size="12" fill="#606070">};</text>
+      <text x="72" y="332" font-family="Courier New,monospace" font-size="13" fill="#606070">}</text>
+    </svg>
+  </div>
 </section>
 
 <hr class="divider"/>
@@ -151,8 +189,9 @@ footer span{color:var(--purple)}
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
-    <div>
-      <div class="about-avatar">BG</div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start">
+      <img src="https://undraw.co/api/illustrations/undraw_developer-activity_re_39tg.svg?color=7F77DD" alt="Developer illustration" style="width:180px;margin-bottom:1.25rem;opacity:.9" onerror="this.style.display='none';document.getElementById('about-avatar').style.display='flex'"/>
+      <div class="about-avatar" id="about-avatar" style="display:none">BG</div>
       <div class="chip-row" style="margin-top:0;flex-direction:column;align-items:flex-start;gap:6px">
         <span class="chip">📍 São Paulo, Brasil</span>
         <span class="chip">💼 Avenue Code</span>
@@ -367,12 +406,20 @@ footer span{color:var(--purple)}
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-grid">
-    <div class="contact-info">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center">
+    <div>
       <div class="section-tag">// contato</div>
-      <h2>Vamos conversar?</h2>
-      <p>Aberto a projetos, colaborações e novas oportunidades. Respondo em até 24h.</p>
+      <h2 style="font-size:1.75rem;font-weight:500;letter-spacing:-0.5px;margin-bottom:1rem">Vamos conversar?</h2>
+      <p style="color:var(--text2);font-size:15px;margin-bottom:2rem">Aberto a projetos, colaborações e novas oportunidades. Respondo em até 24h.</p>
       <div class="contact-links">
+        <a href="mailto:brunosigomes@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          brunosigomes@gmail.com
+        </a>
+        <a href="tel:+5511982032788" class="contact-link">
+          <div class="contact-link-icon">📱</div>
+          (11) 98203-2788
+        </a>
         <a href="https://www.linkedin.com/in/brunosigomes/" target="_blank" class="contact-link">
           <div class="contact-link-icon">💼</div>
           linkedin.com/in/brunosigomes
@@ -383,21 +430,40 @@ footer span{color:var(--purple)}
         </a>
       </div>
     </div>
-    <div>
-      <div class="contact-form">
-        <input type="text" id="cf-nome" placeholder="Seu nome"/>
-        <input type="email" id="cf-email" placeholder="Seu e-mail"/>
-        <input type="text" id="cf-assunto" placeholder="Assunto"/>
-        <textarea id="cf-msg" placeholder="Sua mensagem..."></textarea>
-        <button class="btn-send" onclick="
-          var nome = document.getElementById('cf-nome').value;
-          var email = document.getElementById('cf-email').value;
-          var assunto = document.getElementById('cf-assunto').value;
-          var msg = document.getElementById('cf-msg').value;
-          var corpo = 'Nome: ' + nome + '%0AEmail: ' + email + '%0A%0A' + msg;
-          window.location.href = 'mailto:brunosigomes@gmail.com?subject=' + encodeURIComponent(assunto || 'Contato pelo portfólio') + '&body=' + corpo;
-        ">Enviar mensagem →</button>
-      </div>
+    <div style="display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 380 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px;opacity:.9">
+        <!-- envelope body -->
+        <rect x="40" y="80" width="300" height="200" rx="14" fill="#13131A" stroke="#2A2A3A" stroke-width="1.5"/>
+        <!-- envelope flap open -->
+        <path d="M40 80 L190 175 L340 80" fill="none" stroke="#2A2A3A" stroke-width="1.5"/>
+        <!-- envelope left flap -->
+        <path d="M40 80 L40 280 L155 175Z" fill="#1A1A26" stroke="#2A2A3A" stroke-width="1"/>
+        <!-- envelope right flap -->
+        <path d="M340 80 L340 280 L225 175Z" fill="#1A1A26" stroke="#2A2A3A" stroke-width="1"/>
+        <!-- envelope bottom -->
+        <path d="M40 280 L155 175 L190 200 L225 175 L340 280Z" fill="#13131A" stroke="#2A2A3A" stroke-width="1"/>
+        <!-- letter inside -->
+        <rect x="120" y="20" width="140" height="175" rx="8" fill="#1A1A26" stroke="#534AB7" stroke-width="1"/>
+        <!-- letter lines -->
+        <rect x="136" y="44" width="108" height="3" rx="2" fill="#534AB7" opacity=".8"/>
+        <rect x="136" y="60" width="90" height="2" rx="2" fill="#3C3489" opacity=".7"/>
+        <rect x="136" y="74" width="100" height="2" rx="2" fill="#3C3489" opacity=".7"/>
+        <rect x="136" y="88" width="80" height="2" rx="2" fill="#3C3489" opacity=".7"/>
+        <rect x="136" y="110" width="108" height="2" rx="2" fill="#3C3489" opacity=".5"/>
+        <rect x="136" y="124" width="95" height="2" rx="2" fill="#3C3489" opacity=".5"/>
+        <rect x="136" y="138" width="70" height="2" rx="2" fill="#3C3489" opacity=".5"/>
+        <!-- signature dot -->
+        <circle cx="155" cy="165" r="5" fill="#7F77DD"/>
+        <rect x="165" y="162" width="40" height="2" rx="2" fill="#7F77DD" opacity=".7"/>
+        <!-- notification dot -->
+        <circle cx="330" cy="30" r="14" fill="#7F77DD"/>
+        <text x="330" y="35" text-anchor="middle" font-family="Courier New,monospace" font-size="13" font-weight="700" fill="#fff">1</text>
+        <!-- decorative dots -->
+        <circle cx="60" cy="300" r="4" fill="#534AB7" opacity=".4"/>
+        <circle cx="80" cy="310" r="3" fill="#7F77DD" opacity=".3"/>
+        <circle cx="320" cy="305" r="5" fill="#534AB7" opacity=".4"/>
+        <circle cx="345" cy="295" r="3" fill="#7F77DD" opacity=".3"/>
+      </svg>
     </div>
   </div>
 </section>
